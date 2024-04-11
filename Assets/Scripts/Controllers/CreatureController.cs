@@ -5,11 +5,15 @@ using static Define;
 
 public class CreatureController : MonoBehaviour
 {
+    [SerializeField]
     public float _speed = 5.0f;
+
     public Vector3Int CellPos { get; set; } = Vector3Int.zero;
+
     protected Animator _animator;
     protected SpriteRenderer _sprite;
 
+    [SerializeField]
     protected CreatureState _state = CreatureState.Idle;
     public virtual CreatureState State
     {
@@ -25,6 +29,7 @@ public class CreatureController : MonoBehaviour
     }
 
     protected MoveDir _lastDir = MoveDir.Down;
+    [SerializeField]
     protected MoveDir _dir = MoveDir.Down;
     public MoveDir Dir
     {
@@ -183,9 +188,6 @@ public class CreatureController : MonoBehaviour
     // 스르륵 이동하는 것을 처리
     protected virtual void UpdateMoving()
     {
-        if (State != CreatureState.Moving)
-            return;
-
         Vector3 destPos = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
         Vector3 moveDir = destPos - transform.position;
 
@@ -218,15 +220,12 @@ public class CreatureController : MonoBehaviour
             case MoveDir.Up:
                 destPos += Vector3Int.up;
                 break;
-
             case MoveDir.Down:
                 destPos += Vector3Int.down;
                 break;
-
             case MoveDir.Left:
                 destPos += Vector3Int.left;
                 break;
-
             case MoveDir.Right:
                 destPos += Vector3Int.right;
                 break;
