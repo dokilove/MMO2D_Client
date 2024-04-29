@@ -193,7 +193,7 @@ public class MonsterController : CreatureController
 
         // 대기 시간
         yield return new WaitForSeconds(0.5f);
-        State = CreatureState.Idle;
+        State = CreatureState.Moving;
         _coSkill = null;
     }
 
@@ -206,7 +206,7 @@ public class MonsterController : CreatureController
 
         // 대기 시간
         yield return new WaitForSeconds(0.3f);
-        State = CreatureState.Idle;
+        State = CreatureState.Moving;
         _coSkill = null;
     }
 }
