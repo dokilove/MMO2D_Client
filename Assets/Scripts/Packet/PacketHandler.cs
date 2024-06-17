@@ -52,4 +52,10 @@ class PacketHandler
 
         cc.PosInfo = movePacket.PosInfo;
     }
+
+    // 에러나서 틀만 미리 만들어둠
+    public static void S_SkillHandler(PacketSession session, IMessage packet)
+    {
+
+    }
 }
