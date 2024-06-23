@@ -53,9 +53,20 @@ class PacketHandler
         cc.PosInfo = movePacket.PosInfo;
     }
 
-    // 에러나서 틀만 미리 만들어둠
     public static void S_SkillHandler(PacketSession session, IMessage packet)
     {
+        S_Skill skillPacket = packet as S_Skill;
+        ServerSession serverSession = session as ServerSession;
 
+        GameObject go = Managers.Object.FindById(skillPacket.PlayerId);
+
+        if (go == null)
+            return;
+
+        PlayerController pc = go.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.UseSkill(skillPacket.Info.SkillId);
+        }
     }
 }
