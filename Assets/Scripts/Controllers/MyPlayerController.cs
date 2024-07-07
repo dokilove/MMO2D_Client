@@ -7,6 +7,7 @@ using static Define;
 
 public class MyPlayerController : PlayerController
 {
+    bool _moveKeyPressed = false;
     protected override void Init()
     {
         base.Init();
@@ -28,7 +29,7 @@ public class MyPlayerController : PlayerController
     protected override void UpdateIdle()
     {
         // 이동 상태로 갈지 확인
-        if (Dir != MoveDir.None)
+        if (_moveKeyPressed)
         {
             State = CreatureState.Moving;
             return;
@@ -60,35 +61,32 @@ public class MyPlayerController : PlayerController
 
     void GetDirInput()
     {
+        _moveKeyPressed = true;
 
         if (Input.GetKey(KeyCode.W))
         {
-            //transform.position += Vector3.up * Time.deltaTime * _speed;
             Dir = MoveDir.Up;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            //transform.position += Vector3.down * Time.deltaTime * _speed;
             Dir = MoveDir.Down;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            //transform.position += Vector3.left * Time.deltaTime * _speed;
             Dir = MoveDir.Left;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            //transform.position += Vector3.right * Time.deltaTime * _speed;
             Dir = MoveDir.Right;
         }
         else
         {
-            Dir = MoveDir.None;
+            _moveKeyPressed = false;
         }
     }
     protected override void MoveToNextPos()
     {
-        if (Dir == MoveDir.None)
+        if (_moveKeyPressed == false)
         {
             State = CreatureState.Idle;
             CheckUpdatedFlag();
