@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using ServerCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ class PacketHandler
     {
         S_Spawn spawnPacket = packet as S_Spawn;
 
-        foreach(PlayerInfo player in spawnPacket.Players)
+        foreach(ObjectInfo player in spawnPacket.Objects)
         {
             Managers.Object.Add(player, myPlayer: false);
         }
